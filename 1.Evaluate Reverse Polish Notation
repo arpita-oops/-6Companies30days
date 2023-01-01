@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+    stack<int> sk;
+    for(string s:tokens) {
+        if(s.size()>1 || isdigit(s[0])){
+            sk.push(stoi(s));
+        } 
+        else {
+            long long int x2=sk.top(); 
+            sk.pop();
+            long long int x1=sk.top(); 
+            sk.pop();
+            switch(s[0]) {
+                case '+': x1+=x2; break;
+                case '-': x1-=x2; break;
+                case '*': x1*=x2; break;
+                case '/': x1/=x2; break;
+                default : break;
+            }
+            sk.push(x1);
+        }
+    }
+    return sk.top();
+    }
+};
